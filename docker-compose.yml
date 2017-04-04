@@ -1,0 +1,23 @@
+version: "3"
+services:
+  ethereum-node:
+    build: ./ethereum-node
+    ports:
+      - "47622:8545"
+      - "47621:8180"
+  augur-ui:
+    build:
+      context: ./augur-ui
+      args:
+        ethereumjs_blockstream_commit: master
+        augur_abi_commit: master
+        augur_contracts_commit: master
+        ethereumjs_ledger_commit: master
+        ethrpc_commit: master
+        ethereumjs_connect_commit: master
+        augur_js_commit: 7b63d9098b939cac47594f1d1566c8447cc4247d
+        augur_commit: master
+    links:
+      - ethereum-node
+    ports:
+      - "47620:8080"
